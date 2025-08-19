@@ -1,0 +1,828 @@
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Task & Groups UI - Bahasa Indonesia & Interaktif</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    /* Custom scrollbar for bottom nav */
+    ::-webkit-scrollbar {
+      height: 6px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c1b7aa;
+      border-radius: 10px;
+    }
+    /* Smooth fade transition for screens */
+    .fade-enter {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    .fade-enter-active {
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity 300ms, transform 300ms;
+    }
+    .fade-exit {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .fade-exit-active {
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 300ms, transform 300ms;
+    }
+  </style>
+</head>
+<body
+  class="bg-[#f0ebe7] font-sans flex flex-col items-center justify-center min-h-screen p-4 gap-6 md:flex-row md:items-start md:justify-center md:gap-8"
+>
+  <!-- Container for all screens -->
+  <div id="app" class="relative w-[280px] h-[600px] rounded-[30px] bg-[#f0ebe7] shadow-[8px_8px_0_0_rgba(0,0,0,0.15)] overflow-hidden">
+    <!-- Screen 1: Daftar Tugas -->
+    <section
+      id="screen1"
+      class="absolute inset-0 p-4 flex flex-col"
+      aria-label="Layar Daftar Tugas"
+    >
+      <!-- Top bar -->
+      <div class="flex items-center justify-between mb-3">
+        <div
+          aria-label="Profil pengguna, klik untuk mengubah"
+          class="flex items-center gap-2 cursor-pointer group relative"
+          tabindex="0"
+          id="profileContainer1"
+        >
+          <div
+            id="profileInitial1"
+            class="rounded-full w-7 h-7 bg-[#000000] text-white font-bold flex items-center justify-center text-xs select-none"
+            title="Profil Linux"
+          >
+            L
+          </div>
+          <p class="text-base font-semibold text-[#1c1c1c] select-none">
+            Halo,
+            <span class="font-extrabold" id="profileName1">ronaa!</span>
+          </p>
+          <div
+            class="absolute top-full left-0 mt-1 w-36 bg-[#2a7fff] text-white text-xs rounded-md px-2 py-1 opacity-0 group-focus-within:opacity-100 transition-opacity pointer-events-none z-10"
+          >
+            Klik untuk ubah profil
+          </div>
+        </div>
+        <button
+          class="bg-[#2a7fff] text-white text-xs font-semibold px-3 py-1 rounded-md shadow-md hover:bg-[#1a5edb] transition"
+          id="btnNewTask"
+          aria-label="Tambah Tugas Baru"
+        >
+          + Tugas Baru
+        </button>
+      </div>
+      <!-- Date selector -->
+      <div class="flex items-center justify-between mb-4 gap-2">
+        <button
+          class="flex-1 text-xs font-semibold text-[#1c1c1c] bg-[#e6dfd9] rounded-full py-1"
+          aria-label="Tanggal 19 Agustus"
+        >
+          19.08
+        </button>
+        <button
+          class="flex-1 text-xs font-semibold text-white bg-[#2a7fff] rounded-full py-1"
+          aria-current="date"
+          aria-label="Tanggal Hari Ini"
+        >
+          Hari Ini
+        </button>
+        <button
+          class="flex-1 text-xs font-semibold text-[#1c1c1c] bg-[#e6dfd9] rounded-full py-1"
+          aria-label="Tanggal 21 Agustus"
+        >
+          21.08
+        </button>
+      </div>
+      <!-- Daftar Tugas -->
+      <div class="mb-4 flex-1 overflow-y-auto pr-1">
+        <div
+          class="flex items-center justify-between text-sm font-semibold text-[#1c1c1c] mb-2"
+          aria-label="Judul daftar tugas"
+        >
+          <span>Daftar Tugas</span>
+          <span
+            class="bg-[#1c1c1c] text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold"
+            aria-label="Jumlah tugas 4"
+            >4</span
+          >
+        </div>
+        <div class="flex flex-col gap-2">
+          <div
+            class="bg-[#d9b24a] rounded-xl px-4 py-3 shadow-[4px_4px_0_0_rgba(0,0,0,0.3)] cursor-pointer"
+            tabindex="0"
+            role="button"
+            aria-pressed="false"
+            aria-label="Tugas Menggambar Digital, klik untuk atur"
+            id="task1"
+          >
+            <p class="text-xs font-semibold text-white mb-1">Menggambar Digital</p>
+            <p class="text-[10px] font-normal text-white opacity-80">
+              08:00 - 10:00 • Aplikasi Mobile
+            </p>
+          </div>
+          <div
+            class="bg-[#0f8a7d] rounded-xl px-4 py-3 shadow-[4px_4px_0_0_rgba(0,0,0,0.3)] cursor-pointer"
+            tabindex="0"
+            role="button"
+            aria-label="Tugas Meditasi"
+          >
+            <p class="text-xs font-semibold text-white mb-1">Meditasi</p>
+            <p class="text-[10px] font-normal text-white opacity-80">
+              23:30 - 01:00 • Kesehatan
+            </p>
+          </div>
+          <div
+            class="bg-[#d9b24a] rounded-xl px-4 py-3 shadow-[4px_4px_0_0_rgba(0,0,0,0.3)] cursor-pointer"
+            tabindex="0"
+            role="button"
+            aria-label="Tugas Referensi"
+          >
+            <p class="text-xs font-semibold text-white mb-1">Referensi</p>
+            <p class="text-[10px] font-normal text-white opacity-80">
+              22:00 - 02:00 • Aplikasi Mobile
+            </p>
+          </div>
+          <div
+            class="bg-[#f26a6a] rounded-xl px-4 py-3 shadow-[4px_4px_0_0_rgba(0,0,0,0.3)] cursor-pointer"
+            tabindex="0"
+            role="button"
+            aria-label="Tugas UserFlow app"
+          >
+            <p class="text-xs font-semibold text-white mb-1">UserFlow app</p>
+            <p class="text-[10px] font-normal text-white opacity-80">
+              21:00 - 22:30 • Keluarga
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Dalam Proses -->
+      <div>
+        <div
+          class="flex items-center justify-between text-sm font-semibold text-[#1c1c1c] mb-2"
+          aria-label="Judul daftar tugas dalam proses"
+        >
+          <span>Dalam Proses</span>
+          <span
+            class="bg-[#1c1c1c] text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold"
+            aria-label="Jumlah tugas dalam proses 1"
+            >1</span
+          >
+        </div>
+        <div
+          class="bg-[#2a4f7f] rounded-xl px-4 py-3 shadow-[4px_4px_0_0_rgba(0,0,0,0.3)] cursor-pointer"
+          tabindex="0"
+          role="button"
+          aria-label="Tugas Belajar Bahasa Italia"
+        >
+          <p class="text-xs font-semibold text-white mb-1">Belajar Bahasa Italia</p>
+        </div>
+      </div>
+      <!-- Bottom nav -->
+      <nav
+        class="absolute bottom-3 left-0 right-0 flex justify-between items-center bg-[#f0ebe7] px-6 py-2 rounded-[30px] shadow-[4px_4px_0_0_rgba(0,0,0,0.15)]"
+        role="navigation"
+        aria-label="Navigasi bawah"
+      >
+        <button
+          class="flex flex-col items-center text-[#1c1c1c] text-xs"
+          aria-current="page"
+          aria-label="Beranda"
+          id="navHome"
+        >
+          <i class="fas fa-home mb-1"></i>Beranda
+        </button>
+        <button
+          class="flex flex-col items-center text-[#2a7fff] text-xs font-semibold"
+          aria-label="Grup"
+          id="navGroups"
+        >
+          <i class="fas fa-layer-group mb-1"></i>Grup
+        </button>
+        <button
+          class="flex flex-col items-center text-[#1c1c1c] text-xs"
+          aria-label="Notifikasi"
+          id="navNotifications"
+        >
+          <i class="fas fa-bell mb-1"></i>Notifikasi
+        </button>
+        <button
+          class="flex flex-col items-center text-[#1c1c1c] text-xs"
+          aria-label="Pengaturan"
+          id="navSettings"
+        >
+          <i class="fas fa-cog mb-1"></i>Pengaturan
+        </button>
+      </nav>
+    </section>
+
+    <!-- Screen 2: Grup -->
+    <section
+      id="screen2"
+      class="absolute inset-0 p-4 flex flex-col hidden"
+      aria-label="Layar Grup"
+    >
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-base font-extrabold text-[#1c1c1c]">Grup</h2>
+        <button
+          class="bg-[#2a7fff] text-white text-xs font-semibold px-3 py-1 rounded-md shadow-md hover:bg-[#1a5edb] transition"
+          aria-label="Tambah Grup Baru"
+          id="btnNewGroup"
+        >
+          + Grup Baru
+        </button>
+      </div>
+      <div class="flex flex-col gap-4 overflow-y-auto flex-1 pr-1">
+        <div
+          class="bg-[#d9b24a] rounded-xl px-4 py-5 shadow-[4px_4px_0_0_rgba(0,0,0,0.3)] cursor-pointer relative"
+          tabindex="0"
+          role="button"
+          aria-label="Grup Aplikasi Mobile, klik untuk lihat detail"
+          data-group="mobileapp"
+        >
+          <div class="flex justify-between items-start mb-3">
+            <div
+              class="bg-[#bfa23a] rounded-full w-6 h-6 flex items-center justify-center text-white text-xs font-bold select-none"
+              aria-label="Ikon grup Aplikasi Mobile"
+            >
+              AM
+            </div>
+            <div class="flex -space-x-2">
+              <div
+                class="rounded-full border-2 border-[#d9b24a] w-6 h-6 bg-purple-700 text-white font-bold flex items-center justify-center text-xs select-none"
+                title="Pengguna A"
+                >A</div
+              >
+              <div
+                class="rounded-full border-2 border-[#d9b24a] w-6 h-6 bg-red-600 text-white font-bold flex items-center justify-center text-xs select-none"
+                title="Pengguna B"
+                >B</div
+              >
+              <div
+                class="rounded-full border-2 border-[#d9b24a] w-6 h-6 bg-teal-700 text-white font-bold flex items-center justify-center text-xs select-none"
+                title="Pengguna C"
+                >C</div
+              >
+            </div>
+          </div>
+          <p class="text-[10px] font-semibold text-white opacity-80 mb-1">Daftar Tugas</p>
+          <p class="text-sm font-extrabold text-white mb-1">Aplikasi Mobile</p>
+          <p class="text-[10px] font-semibold text-white opacity-80 text-right">
+            Tugas: 14/14
+          </p>
+        </div>
+        <div
+          class="bg-[#0f8a7d] rounded-xl px-4 py-5 shadow-[4px_4px_0_0_rgba(0,0,0,0.3)] cursor-pointer relative"
+          tabindex="0"
+          role="button"
+          aria-label="Grup Kesehatan, klik untuk lihat detail"
+          data-group="health"
+        >
+          <div class="flex justify-between items-start mb-3">
+            <div
+              class="bg-[#0a5e52] rounded-full w-6 h-6 flex items-center justify-center text-white text-xs font-bold select-none"
+              aria-label="Ikon grup Kesehatan"
+            >
+              K
+            </div>
+            <div class="flex -space-x-2">
+              <div
+                class="rounded-full border-2 border-[#0f8a7d] w-6 h-6 bg-purple-700 text-white font-bold flex items-center justify-center text-xs select-none"
+                title="Pengguna A"
+                >A</div
+              >
+            </div>
+          </div>
+          <p class="text-[10px] font-semibold text-white opacity-80 mb-1">Dalam Proses</p>
+          <p class="text-sm font-extrabold text-white mb-1">Kesehatan</p>
+          <p class="text-[10px] font-semibold text-white opacity-80 text-right">
+            Tugas: 6/12
+          </p>
+        </div>
+        <div
+          class="bg-[#f26a6a] rounded-xl px-4 py-5 shadow-[4px_4px_0_0_rgba(0,0,0,0.3)] cursor-pointer relative"
+          tabindex="0"
+          role="button"
+          aria-label="Grup Keluarga, klik untuk lihat detail"
+          data-group="family"
+        >
+          <div class="flex justify-between items-start mb-3">
+            <div
+              class="bg-[#b23a3a] rounded-full w-6 h-6 flex items-center justify-center text-white text-xs font-bold select-none"
+              aria-label="Ikon grup Keluarga"
+            >
+              K
+            </div>
+            <div class="flex -space-x-2">
+              <div
+                class="rounded-full border-2 border-[#f26a6a] w-6 h-6 bg-purple-700 text-white font-bold flex items-center justify-center text-xs select-none"
+                title="Pengguna A"
+                >A</div
+              >
+              <div
+                class="rounded-full border-2 border-[#f26a6a] w-6 h-6 bg-red-600 text-white font-bold flex items-center justify-center text-xs select-none"
+                title="Pengguna B"
+                >B</div
+              >
+            </div>
+          </div>
+          <p class="text-[10px] font-semibold text-white opacity-80 mb-1">Daftar Tugas</p>
+          <p class="text-sm font-extrabold text-white mb-1">Keluarga</p>
+          <p class="text-[10px] font-semibold text-white opacity-80 text-right">
+            Tugas: 68/69
+          </p>
+        </div>
+      </div>
+      <!-- Bottom nav -->
+      <nav
+        class="absolute bottom-3 left-0 right-0 flex justify-between items-center bg-[#f0ebe7] px-6 py-2 rounded-[30px] shadow-[4px_4px_0_0_rgba(0,0,0,0.15)]"
+        role="navigation"
+        aria-label="Navigasi bawah"
+      >
+        <button
+          class="flex flex-col items-center text-[#1c1c1c] text-xs"
+          aria-label="Beranda"
+          id="navHome2"
+        >
+          <i class="fas fa-home mb-1"></i>Beranda
+        </button>
+        <button
+          class="flex flex-col items-center text-[#2a7fff] text-xs font-semibold"
+          aria-current="page"
+          aria-label="Grup"
+          id="navGroups2"
+        >
+          <i class="fas fa-layer-group mb-1"></i>Grup
+        </button>
+        <button
+          class="flex flex-col items-center text-[#1c1c1c] text-xs"
+          aria-label="Notifikasi"
+          id="navNotifications2"
+        >
+          <i class="fas fa-bell mb-1"></i>Notifikasi
+        </button>
+        <button
+          class="flex flex-col items-center text-[#1c1c1c] text-xs"
+          aria-label="Pengaturan"
+          id="navSettings2"
+        >
+          <i class="fas fa-cog mb-1"></i>Pengaturan
+        </button>
+      </nav>
+    </section>
+
+    <!-- Screen 3: Detail Tugas Menggambar Digital -->
+    <section
+      id="screen3"
+      class="absolute inset-0 p-4 flex flex-col hidden"
+      aria-label="Layar Detail Tugas Menggambar Digital"
+    >
+      <div class="flex items-center justify-between mb-4">
+        <button
+          id="btnBackFromTask"
+          aria-label="Kembali ke daftar tugas"
+          class="text-[#1c1c1c] font-semibold text-sm hover:text-[#2a7fff] transition flex items-center gap-2"
+        >
+          <i class="fas fa-arrow-left"></i> Kembali
+        </button>
+        <h2 class="text-base font-extrabold text-[#1c1c1c]">Menggambar Digital</h2>
+        <div class="w-6"></div>
+      </div>
+      <form id="taskForm" class="flex flex-col gap-4 flex-1 overflow-y-auto">
+        <label for="taskName" class="text-sm font-semibold text-[#1c1c1c]"
+          >Nama Tugas</label
+        >
+        <input
+          type="text"
+          id="taskName"
+          name="taskName"
+          class="rounded-md border border-[#c1b7aa] p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2a7fff]"
+          value="Menggambar Digital"
+          required
+        />
+
+        <label for="taskGroup" class="text-sm font-semibold text-[#1c1c1c]"
+          >Grup</label
+        >
+        <select
+          id="taskGroup"
+          name="taskGroup"
+          class="rounded-md border border-[#c1b7aa] p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2a7fff]"
+          required
+        >
+          <option value="mobileapp" selected>Aplikasi Mobile</option>
+          <option value="health">Kesehatan</option>
+          <option value="family">Keluarga</option>
+        </select>
+
+        <label for="taskTimeStart" class="text-sm font-semibold text-[#1c1c1c]"
+          >Waktu Mulai</label
+        >
+        <input
+          type="time"
+          id="taskTimeStart"
+          name="taskTimeStart"
+          class="rounded-md border border-[#c1b7aa] p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2a7fff]"
+          value="20:00"
+          required
+        />
+
+        <label for="taskTimeEnd" class="text-sm font-semibold text-[#1c1c1c]"
+          >Waktu Selesai</label
+        >
+        <input
+          type="time"
+          id="taskTimeEnd"
+          name="taskTimeEnd"
+          class="rounded-md border border-[#c1b7aa] p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2a7fff]"
+          value="22:00"
+          required
+        />
+
+        <label for="taskDescription" class="text-sm font-semibold text-[#1c1c1c]"
+          >Deskripsi</label
+        >
+        <textarea
+          id="taskDescription"
+          name="taskDescription"
+          rows="4"
+          class="resize-none rounded-md border border-[#c1b7aa] p-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2a7fff]"
+          placeholder="Tambahkan deskripsi tugas..."
+        ></textarea>
+
+        <button
+          type="submit"
+          class="bg-[#2a7fff] text-white text-sm font-semibold rounded-md py-2 shadow-md hover:bg-[#1a5edb] transition"
+        >
+          Simpan
+        </button>
+      </form>
+    </section>
+
+    <!-- Screen 4: Notifikasi -->
+    <section
+      id="screen4"
+      class="absolute inset-0 p-4 flex flex-col hidden"
+      aria-label="Layar Notifikasi"
+    >
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-base font-extrabold text-[#1c1c1c]">Notifikasi</h2>
+      </div>
+      <div class="flex-1 overflow-y-auto text-sm text-[#1c1c1c]">
+        <p class="mb-2">Belum ada notifikasi baru.</p>
+      </div>
+      <nav
+        class="absolute bottom-3 left-0 right-0 flex justify-between items-center bg-[#f0ebe7] px-6 py-2 rounded-[30px] shadow-[4px_4px_0_0_rgba(0,0,0,0.15)]"
+        role="navigation"
+        aria-label="Navigasi bawah"
+      >
+        <button
+          class="flex flex-col items-center text-[#1c1c1c] text-xs"
+          aria-label="Beranda"
+          id="navHome4"
+        >
+          <i class="fas fa-home mb-1"></i>Beranda
+        </button>
+        <button
+          class="flex flex-col items-center text-[#2a7fff] text-xs font-semibold"
+          aria-label="Grup"
+          id="navGroups4"
+        >
+          <i class="fas fa-layer-group mb-1"></i>Grup
+        </button>
+        <button
+          class="flex flex-col items-center text-[#1c1c1c] text-xs"
+          aria-current="page"
+          aria-label="Notifikasi"
+          id="navNotifications4"
+        >
+          <i class="fas fa-bell mb-1"></i>Notifikasi
+        </button>
+        <button
+          class="flex flex-col items-center text-[#1c1c1c] text-xs"
+          aria-label="Pengaturan"
+          id="navSettings4"
+        >
+          <i class="fas fa-cog mb-1"></i>Pengaturan
+        </button>
+      </nav>
+    </section>
+
+    <!-- Screen 5: Pengaturan -->
+    <section
+      id="screen5"
+      class="absolute inset-0 p-4 flex flex-col hidden"
+      aria-label="Layar Pengaturan"
+    >
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-base font-extrabold text-[#1c1c1c]">Pengaturan</h2>
+      </div>
+      <div class="flex-1 overflow-y-auto text-sm text-[#1c1c1c]">
+        <p class="mb-2">Pengaturan aplikasi akan tersedia di sini.</p>
+      </div>
+      <nav
+        class="absolute bottom-3 left-0 right-0 flex justify-between items-center bg-[#f0ebe7] px-6 py-2 rounded-[30px] shadow-[4px_4px_0_0_rgba(0,0,0,0.15)]"
+        role="navigation"
+        aria-label="Navigasi bawah"
+      >
+        <button
+          class="flex flex-col items-center text-[#1c1c1c] text-xs"
+          aria-label="Beranda"
+          id="navHome5"
+        >
+          <i class="fas fa-home mb-1"></i>Beranda
+        </button>
+        <button
+          class="flex flex-col items-center text-[#2a7fff] text-xs font-semibold"
+          aria-label="Grup"
+          id="navGroups5"
+        >
+          <i class="fas fa-layer-group mb-1"></i>Grup
+        </button>
+        <button
+          class="flex flex-col items-center text-[#1c1c1c] text-xs"
+          aria-label="Notifikasi"
+          id="navNotifications5"
+        >
+          <i class="fas fa-bell mb-1"></i>Notifikasi
+        </button>
+        <button
+          class="flex flex-col items-center text-[#1c1c1c] text-xs"
+          aria-current="page"
+          aria-label="Pengaturan"
+          id="navSettings5"
+        >
+          <i class="fas fa-cog mb-1"></i>Pengaturan
+        </button>
+      </nav>
+    </section>
+
+    <!-- Screen 6: Detail Grup (contoh) -->
+    <section
+      id="screen6"
+      class="absolute inset-0 p-4 flex flex-col hidden"
+      aria-label="Layar Detail Grup"
+    >
+      <div class="flex items-center justify-between mb-4">
+        <button
+          id="btnBackFromGroup"
+          aria-label="Kembali ke daftar grup"
+          class="text-[#1c1c1c] font-semibold text-sm hover:text-[#2a7fff] transition flex items-center gap-2"
+        >
+          <i class="fas fa-arrow-left"></i> Kembali
+        </button>
+        <h2 class="text-base font-extrabold text-[#1c1c1c]" id="groupTitle">Detail Grup</h2>
+        <div class="w-6"></div>
+      </div>
+      <div class="flex-1 overflow-y-auto text-sm text-[#1c1c1c]">
+        <p>Detail grup akan ditampilkan di sini.</p>
+      </div>
+      <nav
+        class="absolute bottom-3 left-0 right-0 flex justify-between items-center bg-[#f0ebe7] px-6 py-2 rounded-[30px] shadow-[4px_4px_0_0_rgba(0,0,0,0.15)]"
+        role="navigation"
+        aria-label="Navigasi bawah"
+      >
+        <button
+          class="flex flex-col items-center text-[#1c1c1c] text-xs"
+          aria-label="Beranda"
+          id="navHome6"
+        >
+          <i class="fas fa-home mb-1"></i>Beranda
+        </button>
+        <button
+          class="flex flex-col items-center text-[#2a7fff] text-xs font-semibold"
+          aria-label="Grup"
+          id="navGroups6"
+        >
+          <i class="fas fa-layer-group mb-1"></i>Grup
+        </button>
+        <button
+          class="flex flex-col items-center text-[#1c1c1c] text-xs"
+          aria-label="Notifikasi"
+          id="navNotifications6"
+        >
+          <i class="fas fa-bell mb-1"></i>Notifikasi
+        </button>
+        <button
+          class="flex flex-col items-center text-[#1c1c1c] text-xs"
+          aria-label="Pengaturan"
+          id="navSettings6"
+        >
+          <i class="fas fa-cog mb-1"></i>Pengaturan
+        </button>
+      </nav>
+    </section>
+  </div>
+
+  <script>
+    // Navigation between screens
+    const screens = {
+      screen1: document.getElementById("screen1"),
+      screen2: document.getElementById("screen2"),
+      screen3: document.getElementById("screen3"),
+      screen4: document.getElementById("screen4"),
+      screen5: document.getElementById("screen5"),
+      screen6: document.getElementById("screen6"),
+    };
+
+    // Show only one screen at a time
+    function showScreen(screenId) {
+      Object.keys(screens).forEach((key) => {
+        if (key === screenId) {
+          screens[key].classList.remove("hidden");
+        } else {
+          screens[key].classList.add("hidden");
+        }
+      });
+    }
+
+    // Initial screen
+    showScreen("screen1");
+
+    // Profile editing
+    function editProfile(profileNameId, profileInitialId) {
+      const currentName = document.getElementById(profileNameId).textContent.replace("!", "");
+      const newName = prompt("Masukkan nama profil baru:", currentName);
+      if (newName !== null && newName.trim() !== "") {
+        document.getElementById(profileNameId).textContent = newName.trim() + "!";
+        // Update initial
+        const initial = newName.trim().charAt(0).toUpperCase();
+        document.getElementById(profileInitialId).textContent = initial;
+      }
+    }
+
+    document.querySelectorAll('[aria-label="Profil pengguna, klik untuk mengubah"]').forEach((container) => {
+      container.addEventListener("click", () => {
+        if (container.id === "profileContainer1") {
+          editProfile("profileName1", "profileInitial1");
+        } else if (container.id === "profileContainer2") {
+          editProfile("profileName2", "profileInitial2");
+        }
+      });
+      container.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          if (container.id === "profileContainer1") {
+            editProfile("profileName1", "profileInitial1");
+          } else if (container.id === "profileContainer2") {
+            editProfile("profileName2", "profileInitial2");
+          }
+        }
+      });
+    });
+
+    // Navigation buttons bottom nav screen1
+    document.getElementById("navHome").addEventListener("click", () => showScreen("screen1"));
+    document.getElementById("navGroups").addEventListener("click", () => showScreen("screen2"));
+    document.getElementById("navNotifications").addEventListener("click", () => showScreen("screen4"));
+    document.getElementById("navSettings").addEventListener("click", () => showScreen("screen5"));
+
+    // Navigation buttons bottom nav screen2
+    document.getElementById("navHome2").addEventListener("click", () => showScreen("screen1"));
+    document.getElementById("navGroups2").addEventListener("click", () => showScreen("screen2"));
+    document.getElementById("navNotifications2").addEventListener("click", () => showScreen("screen4"));
+    document.getElementById("navSettings2").addEventListener("click", () => showScreen("screen5"));
+
+    // Navigation buttons bottom nav screen4
+    document.getElementById("navHome4").addEventListener("click", () => showScreen("screen1"));
+    document.getElementById("navGroups4").addEventListener("click", () => showScreen("screen2"));
+    document.getElementById("navNotifications4").addEventListener("click", () => showScreen("screen4"));
+    document.getElementById("navSettings4").addEventListener("click", () => showScreen("screen5"));
+
+    // Navigation buttons bottom nav screen5
+    document.getElementById("navHome5").addEventListener("click", () => showScreen("screen1"));
+    document.getElementById("navGroups5").addEventListener("click", () => showScreen("screen2"));
+    document.getElementById("navNotifications5").addEventListener("click", () => showScreen("screen4"));
+    document.getElementById("navSettings5").addEventListener("click", () => showScreen("screen5"));
+
+    // Navigation buttons bottom nav screen6
+    document.getElementById("navHome6").addEventListener("click", () => showScreen("screen1"));
+    document.getElementById("navGroups6").addEventListener("click", () => showScreen("screen2"));
+    document.getElementById("navNotifications6").addEventListener("click", () => showScreen("screen4"));
+    document.getElementById("navSettings6").addEventListener("click", () => showScreen("screen5"));
+
+    // Click on task "Menggambar Digital" to open detail screen
+    document.getElementById("task1").addEventListener("click", () => {
+      showScreen("screen3");
+    });
+    document.getElementById("task1").addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        showScreen("screen3");
+      }
+    });
+
+    // Back button from task detail
+    document.getElementById("btnBackFromTask").addEventListener("click", () => {
+      showScreen("screen1");
+    });
+
+    // Back button from group detail
+    document.getElementById("btnBackFromGroup").addEventListener("click", () => {
+      showScreen("screen2");
+    });
+
+    // Click on group cards to open detail screen 6 with group name
+    document.querySelectorAll("[data-group]").forEach((el) => {
+      el.addEventListener("click", () => {
+        const groupNameMap = {
+          mobileapp: "Aplikasi Mobile",
+          health: "Kesehatan",
+          family: "Keluarga",
+        };
+        const groupKey = el.getAttribute("data-group");
+        const groupTitle = groupNameMap[groupKey] || "Detail Grup";
+        document.getElementById("groupTitle").textContent = groupTitle;
+        showScreen("screen6");
+      });
+      el.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          const groupNameMap = {
+            mobileapp: "Aplikasi Mobile",
+            health: "Kesehatan",
+            family: "Keluarga",
+          };
+          const groupKey = el.getAttribute("data-group");
+          const groupTitle = groupNameMap[groupKey] || "Detail Grup";
+          document.getElementById("groupTitle").textContent = groupTitle;
+          showScreen("screen6");
+        }
+      });
+    });
+
+    // Handle task form submission and save data locally
+    document.getElementById("taskForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = e.target.taskName.value.trim();
+      const group = e.target.taskGroup.value;
+      const timeStart = e.target.taskTimeStart.value;
+      const timeEnd = e.target.taskTimeEnd.value;
+      const description = e.target.taskDescription.value.trim();
+
+      if (!name || !timeStart || !timeEnd) {
+        alert("Mohon isi semua kolom yang diperlukan.");
+        return;
+      }
+
+      // Save data to localStorage (simple persistence)
+      const taskData = {
+        name,
+        group,
+        timeStart,
+        timeEnd,
+        description,
+      };
+      localStorage.setItem("taskMenggambarDigital", JSON.stringify(taskData));
+
+      // Update task card on screen1
+      const taskCard = document.getElementById("task1");
+      taskCard.querySelector("p:first-child").textContent = name;
+      const groupNameMap = {
+        mobileapp: "Aplikasi Mobile",
+        health: "Kesehatan",
+        family: "Keluarga",
+      };
+      const groupName = groupNameMap[group] || "Lainnya";
+      taskCard.querySelector("p:nth-child(2)").textContent = `${timeStart} - ${timeEnd} • ${groupName}`;
+
+      alert("Tugas berhasil disimpan!");
+      showScreen("screen1");
+    });
+
+    // On page load, load saved task data if any
+    window.addEventListener("load", () => {
+      const savedTask = localStorage.getItem("taskMenggambarDigital");
+      if (savedTask) {
+        const data = JSON.parse(savedTask);
+        // Update form fields
+        document.getElementById("taskName").value = data.name || "Menggambar Digital";
+        document.getElementById("taskGroup").value = data.group || "mobileapp";
+        document.getElementById("taskTimeStart").value = data.timeStart || "20:00";
+        document.getElementById("taskTimeEnd").value = data.timeEnd || "22:00";
+        document.getElementById("taskDescription").value = data.description || "";
+        // Update task card on screen1
+        const taskCard = document.getElementById("task1");
+        taskCard.querySelector("p:first-child").textContent = data.name || "Menggambar Digital";
+        const groupNameMap = {
+          mobileapp: "Aplikasi Mobile",
+          health: "Kesehatan",
+          family: "Keluarga",
+        };
+        const groupName = groupNameMap[data.group] || "Lainnya";
+        taskCard.querySelector("p:nth-child(2)").textContent = `${data.timeStart} - ${data.timeEnd} • ${groupName}`;
+      }
+    });
+  </script>
+</body>
+</html>
